@@ -40,7 +40,9 @@ I coded in **C++11**.
 * test_6: First 50 rows of `H1B_FY_2016.csv`
 * test_7: Randomly selected 10% of `H1B_FY_2014.csv` (51,951 rows)
 * test_8: Randomly selected 10% of `H1B_FY_2015.csv` (61,881 rows)
-* test_9: Randomly selected 20% of `H1B_FY_2016.csv` (129,571 rows)
+* test_9: Randomly selected 10% of `H1B_FY_2016.csv` (64,786 rows)
+
+`H1B_FY_201x.csv` files are provided by [Insight](https://github.com/InsightDataScience/h1b_statistics/blob/master/README.md#input-dataset).
 
 # Run
 
