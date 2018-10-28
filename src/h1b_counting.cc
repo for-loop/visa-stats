@@ -60,7 +60,7 @@ string trimQuotes(string str)
 
 
 // Check if the key exists in the hash table
-string checkKey(unordered_map<string, unsigned>& ht, const string& key1, const string& key2)
+const string checkKey(unordered_map<string, unsigned>& ht, const string& key1, const string& key2)
 {
   return (ht.find(key1) != ht.end()) ? key1: key2;
 }
@@ -80,7 +80,7 @@ void count(map<string, unsigned>& m1, map<string, unsigned>& m2,
   // Since CASE_STATUS column may be positioned anywhere
   // relative to the SOC_NAME and WORKSITE_STATE columns,
   // do this first, then do a separate while-loop later
-  string keyStatus = checkKey(ht, STATUS, STATUS_ALT);
+  const string keyStatus(checkKey(ht, STATUS, STATUS_ALT));
   while(end != string::npos) {
     if(columnIndex == ht[keyStatus]) {
       isCertified = (s.substr(start, end-start) == CERTIFIED);
@@ -104,8 +104,8 @@ void count(map<string, unsigned>& m1, map<string, unsigned>& m2,
     start = 0;
     end = s.find(DELIM, start);
     columnIndex = 0;
-    string keyOccupation = checkKey(ht, OCCUPATION, OCCUPATION_ALT);
-    string keyState = checkKey(ht, STATE, STATE_ALT);
+    const string keyOccupation(checkKey(ht, OCCUPATION, OCCUPATION_ALT));
+    const string keyState(checkKey(ht, STATE, STATE_ALT));
     while(end != string::npos) {
       if(columnIndex == ht[keyOccupation]) {
 	m1[trimQuotes(s.substr(start, end-start))]++;
