@@ -25,7 +25,7 @@ const unsigned NUM_COL_INTEREST = 2;
 
 
 // Parse header info and return a hash table that has column index by name
-unordered_map<string, unsigned> parseHeaderInfo(const string& s)
+const unordered_map<string, unsigned> parseHeaderInfo(const string& s)
 {
   unordered_map<string, unsigned> ht;
   size_t start = 0;
@@ -59,8 +59,8 @@ const string trimQuotes(string str)
 }
 
 
-// Check if the key exists in the hash table
-const string checkKey(unordered_map<string, unsigned>& ht, const string& key1, const string& key2)
+// Check which key to use in the hash table
+const string checkKey(const unordered_map<string, unsigned>& ht, const string& key1, const string& key2)
 {
   return (ht.find(key1) != ht.end()) ? key1: key2;
 }
@@ -91,14 +91,12 @@ void count(map<string, unsigned>& m1, map<string, unsigned>& m2,
     end = s.find(DELIM, start);
     columnIndex++;
   }
-  // Check the last column if needed
-  // (in case the CASE_STATUS is the last column)
+  // Check the last column if needed (in case the status is the last column)
   if(!isCertified)
     if(columnIndex == ht[keyStatus])
       isCertified = (s.substr(start, end-start) == CERTIFIED);
 
-  // If certified, parse values from 2 columns, SOC_NAME and WORKSITE_STATE
-  // and increment map object
+  // If certified, parse values from two columns of interest and increment map objects
   unsigned nCounted = 0;
   if(isCertified) {
     start = 0;
@@ -194,9 +192,9 @@ int main(int argc, char **argv)
   if(inputFile.is_open()) {
     string line;
     getline(inputFile, line);
-    unordered_map<string, unsigned> headerInfo(parseHeaderInfo(line));
+    const unordered_map<string, unsigned> headerInfo(parseHeaderInfo(line));
     
-    // Read each row and count by either occupation or state
+    // read each row and count by either occupation or state
     map<string, unsigned> occupation;
     map<string, unsigned> state;
     unordered_map<string, unsigned> nCertified;
