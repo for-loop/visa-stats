@@ -47,7 +47,7 @@ unordered_map<string, unsigned> parseHeaderInfo(const string& s)
 
 
 // Remove double-quotes around a string, if any
-string trimQuotes(string str)
+const string trimQuotes(string str)
 {
   // trim leading double-quote
   str.erase(str.find_last_not_of(DOUBLE_QUOTE) + 1);
