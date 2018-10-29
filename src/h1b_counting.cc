@@ -25,7 +25,7 @@ const unsigned NUM_COL_INTEREST = 2;
 
 
 // Parse header info and return a hash table that has column index by name
-unordered_map<string, unsigned> parseHeaderInfo(const string& s)
+const unordered_map<string, unsigned> parseHeaderInfo(const string& s)
 {
   unordered_map<string, unsigned> ht;
   size_t start = 0;
@@ -60,7 +60,7 @@ const string trimQuotes(string str)
 
 
 // Check if the key exists in the hash table
-const string checkKey(unordered_map<string, unsigned>& ht, const string& key1, const string& key2)
+const string checkKey(const unordered_map<string, unsigned>& ht, const string& key1, const string& key2)
 {
   return (ht.find(key1) != ht.end()) ? key1: key2;
 }
@@ -194,7 +194,7 @@ int main(int argc, char **argv)
   if(inputFile.is_open()) {
     string line;
     getline(inputFile, line);
-    unordered_map<string, unsigned> headerInfo(parseHeaderInfo(line));
+    const unordered_map<string, unsigned> headerInfo(parseHeaderInfo(line));
     
     // Read each row and count by either occupation or state
     map<string, unsigned> occupation;
